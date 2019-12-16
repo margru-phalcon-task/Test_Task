@@ -8,7 +8,7 @@ use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
 
-class CustomerForm extends Form
+class ContactForm extends Form
 {
     public function initialize( $entity = null, $options = null ){
 
@@ -17,7 +17,7 @@ class CustomerForm extends Form
         );
 
         $first_name = new Text('first_name');
-        $first_name->setLabel('Vorname');
+        $first_name->setLabel('First name');
         $first_name->addValidator(
             new PresenceOf(
                 [
@@ -28,7 +28,7 @@ class CustomerForm extends Form
         $this->add($first_name);
 
         $last_name = new Text('last_name');
-        $last_name->setLabel('Nachname');
+        $last_name->setLabel('Last name');
         $last_name->addValidator(
             new PresenceOf(
                 [

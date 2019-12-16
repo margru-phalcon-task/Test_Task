@@ -5,7 +5,7 @@ use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class Customers extends Model{
+class Contacts extends Model{
 
     public $id;
     public $first_name;

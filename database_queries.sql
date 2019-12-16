@@ -1,4 +1,4 @@
-CREATE TABLE `customers` (
+CREATE TABLE `contacts` (
     `id`            int(10)     unsigned NOT NULL AUTO_INCREMENT,
     `first_name`    varchar(70)          NOT NULL,
     `last_name`     varchar(70)          NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `customers` (
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO customers ( first_name, last_name, email)
+INSERT INTO contacts ( first_name, last_name, email)
 VALUES (
     'Martin',
     'Müller',

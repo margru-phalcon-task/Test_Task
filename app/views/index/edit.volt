@@ -1,10 +1,10 @@
 {{ content() }}
 
+<h1 class="text-center pt-5 pb-5">Edit Contact</h1>
+
 {{ form("index/save", 'role': 'form') }}
 
 {{ flash.output() }}
-
-<h1 class="text-center pt-5 pb-5">Kunden bearbeiten</h1>
 
 <fieldset>
 
@@ -21,10 +21,10 @@
 
     <div class="row">
         <div class="col-5">
-            {{ link_to("index", "&larr; Zurück", 'class': "button button-grey") }}
+            {{ link_to("index", "&larr; Back", 'class': "button button-grey") }}
         </div>
         <div class="col-5 offset-2">
-            {{ submit_button("Speichern", "class": "button button-green") }}
+            {{ submit_button("Save", "class": "button button-green") }}
         </div>
     </div>
 

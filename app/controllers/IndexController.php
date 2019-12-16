@@ -6,7 +6,7 @@ class IndexController extends ControllerBase{
 
     public function initialize()
     {
-        $this->tag->setTitle('Manage your Customers');
+        $this->tag->setTitle('Manage Contacts');
 
         parent::initialize();
     }
@@ -17,27 +17,27 @@ class IndexController extends ControllerBase{
         $this->assets->addCss('css/style.css');
         $this->assets->addCss('css/index.css');
 
-        $this->view->customers = Customers::find();
+        $this->view->contacts = Contacts::find();
 
     }
 
-    // Add new Customer
+    // Add new Contact
     public function newAction(){
 
         $this->assets->addCss('css/index.css');
 
-        $this->view->form = new CustomerForm();
+        $this->view->form = new ContactForm();
 
     }
 
-     // Edits a customer based on its id
+     // Edits a contact based on its id
     public function editAction($id)
     {
         if (!$this->request->isPost()) {
-            $customer = Customers::findFirstById($id);
+            $contact = Contacts::findFirstById($id);
 
-            if (!$customer) {
-                $this->flash->error("Customer was not found");
+            if (!$contact) {
+                $this->flash->error("Contact was not found");
 
                 return $this->dispatcher->forward(
                     [
@@ -47,8 +47,8 @@ class IndexController extends ControllerBase{
                 );
             }
 
-            $this->view->form = new CustomerForm(
-                $customer,
+            $this->view->form = new ContactForm(
+                $contact,
                 [
                     'edit' => true,
                 ]
@@ -57,15 +57,15 @@ class IndexController extends ControllerBase{
         }
     }
 
-    // DB - Insert a new customer
+    // DB - Insert a new contact
     public function createAction(){
 
-        // No $_POST, redirect back to addCustomer
+        // No $_POST, redirect back to new
         if( !$this->request->isPost()) {
             $this->response->redirect('/index/new');
         }
 
-        $form = new CustomerForm();
+        $form = new ContactForm();
 
         // Check if Input is valid, otherwise redirect
         if (!$form->isValid($_POST)) {
@@ -83,10 +83,10 @@ class IndexController extends ControllerBase{
 
         }
 
-        $customer = new Customers();
+        $contact = new Contacts();
 
         // Store and check for errors
-        $success = $customer->save(
+        $success = $contact->save(
             $this->request->getPost(),
             [
                 "first_name",
@@ -97,14 +97,14 @@ class IndexController extends ControllerBase{
 
         if ($success) {
 
-            $this->flash->success( "Kunde erfolgreich angelegt" );
+            $this->flash->success( "Contact successfully added" );
             return $this->dispatcher->forward(
                 [
                     'action' => 'index'
                 ]);
 
         } else {
-            $messages = $customer->getMessages();
+            $messages = $contact->getMessages();
 
             foreach ($messages as $message) {
                 $this->flash->error( $message );
@@ -118,7 +118,7 @@ class IndexController extends ControllerBase{
 
     }
 
-    // DB - Saves a new customer
+    // DB - Saves a new contact
     public function saveAction()
     {
         if (!$this->request->isPost()) {
@@ -132,10 +132,10 @@ class IndexController extends ControllerBase{
 
         $id = $this->request->getPost("id", "int");
 
-        $customer = Customers::findFirstById($id);
+        $contact = Contacts::findFirstById($id);
 
-        if (!$customer) {
-            $this->flash->error("Customer does not exist");
+        if (!$contact) {
+            $this->flash->error("Contact does not exist");
 
             return $this->dispatcher->forward(
                 [
@@ -145,13 +145,13 @@ class IndexController extends ControllerBase{
             );
         }
 
-        $form = new CustomerForm();
+        $form = new ContactForm();
 
         $this->view->form = $form;
 
         $data = $this->request->getPost();
 
-        if (!$form->isValid($data, $customer)) {
+        if (!$form->isValid($data, $contact)) {
             foreach ($form->getMessages() as $message) {
                 $this->flash->error($message);
             }
@@ -165,8 +165,8 @@ class IndexController extends ControllerBase{
             );
         }
 
-        if ($customer->save() == false) {
-            foreach ($customer->getMessages() as $message) {
+        if ($contact->save() == false) {
+            foreach ($contact->getMessages() as $message) {
                 $this->flash->error($message);
             }
 
@@ -181,7 +181,7 @@ class IndexController extends ControllerBase{
 
         $form->clear();
 
-        $this->flash->success("Customer was updated successfully");
+        $this->flash->success("Contact was updated successfully");
 
         return $this->dispatcher->forward(
             [
@@ -200,10 +200,10 @@ class IndexController extends ControllerBase{
      *
      */
     public function deleteAction( $id ) {
-        $customers = Customers::findFirstById($id);
+        $contacts = Contacts::findFirstById($id);
 
-        if (!$customers) {
-            $this->flash->error("Customer was not found");
+        if (!$contacts) {
+            $this->flash->error("Contact was not found");
 
             return $this->dispatcher->forward(
                 [
@@ -213,8 +213,8 @@ class IndexController extends ControllerBase{
             );
         }
 
-        if (!$customers->delete()) {
-            foreach ($customers->getMessages() as $message) {
+        if (!$contacts->delete()) {
+            foreach ($contacts->getMessages() as $message) {
                 $this->flash->error($message);
             }
 
@@ -226,7 +226,7 @@ class IndexController extends ControllerBase{
             );
         }
 
-        $this->flash->success("Customer was deleted");
+        $this->flash->success("Contact was deleted");
 
         return $this->dispatcher->forward(
             [
