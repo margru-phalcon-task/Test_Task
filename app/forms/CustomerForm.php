@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Forms\Form;
+use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email;
@@ -10,6 +11,10 @@ use Phalcon\Validation\Validator\StringLength;
 class CustomerForm extends Form
 {
     public function initialize( $entity = null, $options = null ){
+
+        $this->add(
+            new Hidden("id")
+        );
 
         $first_name = new Text('first_name');
         $first_name->setLabel('Vorname');

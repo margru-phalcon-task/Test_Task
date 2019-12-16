@@ -15,11 +15,13 @@
             <th>Nachname</th>
             <th>Email</th>
             <th>Hinzugefügt am</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <td class="text-right" colspan="5">Users quantity: <?php echo $customers->count(); ?></td>
+            <td class="text-right" colspan="7">Anzahl User: <?php echo $customers->count(); ?></td>
         </tr>
         </tfoot>
         <tbody>
@@ -29,7 +31,13 @@
                 <td>{{ customer.first_name }}</td>
                 <td>{{ customer.last_name }}</td>
                 <td>{{ customer.email }}</td>
-                <td>{{ customer.created_date }}</td>
+                <td>{{ customer.created_date }}</td> {# ToDo: Date Format #}
+                <td width="7%">
+                    {{ link_to("index/edit/" ~ customer.id, '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', "class": "btn btn-default", 'title': 'Eintrag ' ~ customer.id ~ ' bearbeiten') }}
+                </td>
+                <td width="7%">
+                    {{ link_to("index/delete/" ~ customer.id, '<i class="fa fa-trash-o" aria-hidden="true"></i>', "class": "btn btn-default", 'title': 'Eintrag ' ~ customer.id ~ ' löschen') }}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

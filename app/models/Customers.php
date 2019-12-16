@@ -48,4 +48,8 @@ class Customers extends Model{
         return $this->validate($validation);
     }
 
+    public function beforeUpdate(){
+        $this->updated_date = date('Y-m-d H:i:s');
+    }
+
 }
