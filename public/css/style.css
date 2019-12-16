@@ -11,23 +11,22 @@
     margin: 25px 0;
     padding: 24px 34px;
     text-align: center;
-    border-bottom-width: 5px;
     font-size: 22px;
 }
 
 .container .button-red{
     background-color: #C02942;
-    color: #FFF
+    color: #FFF;
 }
 
 .container .button-green{
     background-color: #1ABC9C;
-    color: #FFF
+    color: #FFF;
 }
 
 .container .button-grey{
     background-color: lightgray;
-    color: #FFF
+    color: #FFF;
 }
 
 .container form ul{
@@ -40,12 +39,13 @@
 
 .container .button-red:hover{
     background-color: #bd3c54 !important;
-    color: #FFF
+    color: #FFF;
 }
 
-.container .green:hover{
-    background-color: #1ABC9C !important;
-    color: #FFF
+.container .button-green:hover{
+    background-color: #08C0AE !important;
+    color: #FFF;
+    cursor: pointer;
 }
 
 .container label{

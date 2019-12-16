@@ -1,6 +1,6 @@
-<h1 class="text-center pt-5 pb-5">Neuen Kunden hinzufügen</h1>
-
 {{ content() }}
+
+<h1 class="text-center pt-5 pb-5">Neuen Kunden hinzufügen</h1>
 
 {{ flash.output() }}
 
