@@ -5,7 +5,9 @@
 
 {{ flash.output() }}
 
-{% if contacts.count() > 0 %}
+<div class="pull-right mb-2">Page {{ page.current }} / {{ page.total_pages }}</div>
+
+{% if page.total_items > 0 %}
 
     <table class="table table-bordered table-hover">
         <thead class="thead-light">
@@ -21,11 +23,11 @@
         </thead>
         <tfoot>
         <tr>
-            <td class="text-right" colspan="7">Contacts: {{ contacts.count() }}</td>
+            <td class="text-right" colspan="7">{{ page.total_items }} Contacts in total</td>
         </tr>
         </tfoot>
         <tbody>
-        {% for contact in contacts %}
+        {% for contact in page.items %}
             <tr>
                 <td>{{ contact.id }}</td>
                 <td>{{ contact.first_name }}</td>
@@ -42,7 +44,18 @@
         {% endfor %}
         </tbody>
     </table>
+{% else %}
+    <p class="text-center">No Contacts saved.</p>
 {% endif %}
+
+<div class="pagination float-right">
+    {% for pagination in 1 .. page.total_pages %}
+        <a href='/index?page={{ pagination }}'>
+            {{ pagination }}
+        </a>
+    {% endfor %}
+</div>
+
 
 <div class="row">
     <div class="col-12 offset-0 col-lg-6 offset-lg-3">

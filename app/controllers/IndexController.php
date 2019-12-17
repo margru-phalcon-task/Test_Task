@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Controller;
+use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 class IndexController extends ControllerBase{
 
@@ -17,8 +18,20 @@ class IndexController extends ControllerBase{
         $this->assets->addCss('css/style.css');
         $this->assets->addCss('css/index.css');
 
-        $this->view->contacts = Contacts::find();
+        $contacts = Contacts::find();
+        $currentPage = isset($_GET['page'])? $_GET['page'] : 1 ;
 
+        $paginator = new PaginatorModel(
+            [
+                'data'  => $contacts,
+                'limit' => 10,
+                'page'  => $currentPage,
+            ]
+        );
+
+        // Get the paginated results
+        $page = $paginator->getPaginate();
+        $this->view->page = $page;
     }
 
     // Add new Contact
@@ -100,6 +113,7 @@ class IndexController extends ControllerBase{
             $this->flash->success( "Contact successfully added" );
             return $this->dispatcher->forward(
                 [
+                    'controller' => 'index',
                     'action' => 'index'
                 ]);
 
